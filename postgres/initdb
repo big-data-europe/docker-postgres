@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# start postgres
+service postgresql start
+
+# Provide a password for default user (postgres)
+psql -c "ALTER USER postgres WITH PASSWORD 'postgres';"
+
+# Create db
+createdb sextantusers
+
+psql -U postgres -d sextantusers -f testDump.sql
+
+# stop postgres
+service postgresql stop

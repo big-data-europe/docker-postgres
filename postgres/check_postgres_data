@@ -1,0 +1,22 @@
+#!/bin/sh
+
+PGDATA="/var/lib/postgresql/9.4/main/"
+export PGDATA
+
+if [ -f "$PGDATA/PG_VERSION" ]; then
+    echo "data directory is not empty, not moving postgres data."
+else
+    echo "moving postgres initial data"
+    
+    if [ ! -d "$PGDATA" ]; then
+      echo "pgdata directory does not exist, creating it"
+      mkdir -p $PGDATA
+    fi
+    
+    chown postgres:postgres $PGDATA
+    chmod 700 $PGDATA
+    cp -pr /var/lib/postgresql/9.4/main_tmp/* $PGDATA
+    echo "finished moving postgres data."
+fi 
+
+rm -rf /var/lib/postgresql/9.4/main_tmp
