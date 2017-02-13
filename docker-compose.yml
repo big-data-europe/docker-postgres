@@ -1,0 +1,16 @@
+version: '2'
+services:
+
+  sextant:
+    image: bde2020/sextant
+    container_name: sextant
+    ports:
+      - "8190:8080"
+    links:
+      - "postgres:postgres"
+
+  postgres:
+    image: bde2020/postgres
+    container_name: postgres
+    volumes:
+      - <host_machine_dir>:/var/lib/postgresql/9.4/main
