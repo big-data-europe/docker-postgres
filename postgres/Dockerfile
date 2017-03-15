@@ -14,6 +14,7 @@ MAINTAINER Giorgos Argyriou <gioargyr@di.uoa.gr>
 RUN apt-get update && apt-get install -y \
     postgresql-9.4 \
     postgresql-server-dev-9.4 \
+    curl \
  && apt-get clean  && rm -rf /var/lib/apt/lists/*
 
 ADD initdb check_postgres_data enable_remote /usr/local/bin/
